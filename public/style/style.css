@@ -1,0 +1,7 @@
+.selected-class-name {
+  color: red;
+}
+
+.strike {
+    text-decoration: line-through;
+}
