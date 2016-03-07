@@ -9,7 +9,7 @@
     var morgan = require('morgan');             // log requests to the console (express4)
     var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
     var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-    var toDos = require('./routes/twoteHandlers');
+    var timestamp = require('./routes/timestampRoutes');
 
 
     // configuration =================
@@ -30,11 +30,8 @@
         res.sendfile('./public/index.html');
     })
 
-    app.get('/api/toDos', toDos.getAll);
-
-    app.post('/api/toDos', toDos.add);
-    app.post('/api/toDos/edit/:toDo_id', toDos.edit);
-    app.post('/api/move/toDos/:toDo_id', toDos.move)
+    app.get('/api/comments/:videoId', timestamp.getComments);
+    app.post('/api/comments/new', timestamp.newComment);
 
     // listen (start app with node server.js) ======================================
 
