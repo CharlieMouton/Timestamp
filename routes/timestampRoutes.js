@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
-var Comment = require(path.join(__dirname,'../models/commentModel'));
+var Comment = require(path.join(__dirname,'../models/commentModel')).comment;
+var User = require(path.join(__dirname,'../models/commentModel')).user;
 
 var timestamp = {};
 
@@ -14,15 +15,15 @@ timestamp.getComments = function(req, res){
 	});
 }
 
-timestamp.newComment = function(req, res){
-	Comment.create({req.body}, function(err, newComment){
-		if(err){
-			res.send(err);
-		}
+// timestamp.newComment = function(req, res){
+// 	Comment.create({req.body}, function(err, newComment){
+// 		if(err){
+// 			res.send(err);
+// 		}
 
-		res.json(newComment);
-	})
-});
+// 		res.json(newComment);
+// 	})
+// });
 
 
 
