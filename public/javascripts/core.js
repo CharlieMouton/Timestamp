@@ -14,14 +14,17 @@ function mainController($scope, $http) {
 
 
 	//called on click of form with whole youtube link
+	//loads video and all comments
 	//ng-click = getVideo(string)
 	$scope.getVideo = function(vidLink){
 		//display video from youtube
 		//check for comments based on id
 		var vidId = vidLink.split("=")[1];
 		console.log(vidId);
-		$http.get('/api/video/')
+		$http.get('api/comments/' + vidId)
 			.success(function(data){
+				$scope.comments = data;
+
 			   	var tag = document.createElement('script');
 
 			    tag.src = "https://www.youtube.com/iframe_api";
@@ -72,18 +75,6 @@ function mainController($scope, $http) {
 			});
 	};
 
-	//called when video is loaded with full youtube link
-	//maybe use youtube event figure out when the video starts playing?
-	$scope.getComments = function(vidLink){
-		var vidId = vidLink.split("=")[1];
-		$http.get('api/comments/' + vidId)
-			.success(function(data){
-				$scope.comments = data;
-			})
-			.error(function(data){
-				console.log('Error:' + data);
-			});
-	}
 
 	$scope.newComment = function(){
 		// $http.post('api/toDos', $scope.formData)
@@ -109,6 +100,8 @@ function mainController($scope, $http) {
 	// 		});
 	// };
 	}
+
+	//need some kind of front end function to move things off the screen
 
 }
 // 2. This code loads the IFrame Player API code asynchronously.

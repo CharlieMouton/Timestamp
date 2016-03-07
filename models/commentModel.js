@@ -5,7 +5,8 @@ var Schema = mongoose.Schema
 var commentSchema = mongoose.Schema({
     comment: String,
     time: Number,
-    videoId: String
+    videoId: String,
+    user: String
     });
 
 
