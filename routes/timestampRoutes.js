@@ -10,20 +10,20 @@ timestamp.getComments = function(req, res){
 
 	var vidId = req.params.videoId;
 	console.log(vidId)
-	// Comment.find({}, function(err, commentList){
-	// 	if(err){
-	// 		res.send(err);
-	// 	}
-	// 	console.log(commentList)
-	// 	res.json(commentList);
-	// });
-	Comment.create({comment:"haha thats so funnt", time:10, videoId: "PfwwCpAy0-0", user: "Annabel"}, function(err, comment){
+	Comment.find({}, function(err, commentList){
 		if(err){
-			console.log(err)
 			res.send(err);
 		}
-		console.log(comment);
-	})
+		console.log(commentList)
+		res.json(commentList);
+	});
+	// Comment.create({comment:"haha thats so funnt", time:10, videoId: "PfwwCpAy0-0", user: "Annabel"}, function(err, comment){
+	// 	if(err){
+	// 		console.log(err)
+	// 		res.send(err);
+	// 	}
+	// 	console.log(comment);
+	// })
 
 }
 
