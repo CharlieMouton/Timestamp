@@ -21,9 +21,11 @@
     </style>
 
     <!-- SPELLS -->
-    <script href="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script href="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="//www.youtube.com/iframe_api"></script>
     <script src="javascripts/core.js" type="text/javascript"></script>
+
 
 </head>
 <!-- SET THE CONTROLLER AND GET ALL toDoS -->
@@ -32,5 +34,18 @@
  -->        <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
         <div id="player"></div>
 
+    <div id = "linkForm">
+        <form>
+            Video Link <input type="text" ng-model = "vidLink"> </input>
+            <button ng-click = "getVideo(vidLink)" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id = "linkForm">
+        <form>
+            Num Start <input type="text" ng-model = "numStart"> </input>
+            <button ng-click = "setTime(numStart)" type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

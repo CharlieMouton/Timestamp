@@ -12,6 +12,7 @@ function mainController($scope, $http) {
 	// 		console.log('Error:' + data);
 	// 	});
 
+	var player;
 
 	//called on click of form with whole youtube link
 	//loads video and all comments
@@ -24,16 +25,10 @@ function mainController($scope, $http) {
 		$http.get('api/comments/' + vidId)
 			.success(function(data){
 				$scope.comments = data;
-
-			   	var tag = document.createElement('script');
-
-			    tag.src = "https://www.youtube.com/iframe_api";
-			    var firstScriptTag = document.getElementsByTagName('script')[0];
-			    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+				console.log($scope.comments);
 			      // 3. This function creates an <iframe> (and YouTube player)
 			      //    after the API code downloads.
-			    var player;
+			     console.log('before main function')
 			    function onYouTubeIframeAPIReady() {
 			        player = new YT.Player('player', {
 			          	height: '390',
@@ -41,10 +36,14 @@ function mainController($scope, $http) {
 			          	videoId: vidId,
 			          	events: {
 			            	'onReady': onPlayerReady,
-			            	'onStateChange': onPlayerStateChange          
+			            	'onStateChange': onPlayerStateChange,
+			            	'onError': onErr          
 			            }
 			        });
+			     	console.log('IN YOUTUBE FRAME MAKER')
 			     }
+
+			     onYouTubeIframeAPIReady();
 
 			      // 4. The API will call this function when the video player is ready.
 			    function onPlayerReady(event) {
@@ -52,10 +51,14 @@ function mainController($scope, $http) {
 			    }
 
 			      // 5. The API calls this function when the player's state changes.
+			      var done = false;
 			      //    The function indicates that when playing a video (state=1),
 			      //    the player should play for six seconds and then stop.
-			    var done = false;
-
+			    function onPlayerStateChange(event) {
+			        if (event.data == YT.PlayerState.PLAYING && !done) {
+			          done = true;
+			        }
+			      }
 			    function onPlayerStateChange(event) {
 			        if (event.data == YT.PlayerState.PLAYING && !done) {
 
@@ -63,10 +66,14 @@ function mainController($scope, $http) {
 			          done = true;
 			        }
 			    }
+
+			    function onErr(event){
+			    	console.log("err");
+			    }
 			    	      //THIS IS WHERE IT IS PRINTING THE CURRENT TIME YAY
       			setInterval(function(){
    				// here you'd raise some sort of event based on the value of getCurrentTime();
-   					currentTime = player.getCurrentTime
+   					currentTime = player.getCurrentTime()
    					console.log(currentTime)
  				}, 100); // polling 8 times a second, to make sure you get it every time it changes.
 			})
@@ -74,6 +81,10 @@ function mainController($scope, $http) {
 					console.log('Error:' + data);
 			});
 	};
+
+	$scope.setTime = function(numstart){
+		player.seekTo(numstart, true);
+	}
 
 
 	$scope.newComment = function(){
