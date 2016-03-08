@@ -7,8 +7,12 @@
   "dependencies": {
     "body-parser": "~1.5.2",
     "express": "~4.7.2",
+    "express-session": "^1.13.0",
     "method-override": "~2.1.2",
     "mongoose": "~4.4.5",
-    "morgan": "~1.2.2"
+    "morgan": "~1.2.2",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.0",
+    "passport-local": "^1.0.0"
   }
 }
