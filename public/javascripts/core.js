@@ -24,20 +24,10 @@ Timestamp.controller('mainController', function($scope, $http) {
 
 	var currentTime;
 
-	// $http.get('/')
-	// 	.success(function(data){
-	// 		$scope.toDos = data;
-	// 	})
-	// 	.error(function(data){
-	// 		console.log('Error:' + data);
-	// 	});
-
 	var player;
 
 	//called on click of form with whole youtube link
 	//loads video and all comments
-	//ng-click = getVideo(string)
-	console.log("before get video")
 	$scope.getVideo = function(vidLink){
 		//display video from youtube
 		//check for comments based on id
@@ -45,7 +35,8 @@ Timestamp.controller('mainController', function($scope, $http) {
 		console.log(vidId);
 		$http.get('api/comments/' + vidId)
 			.success(function(data){
-				$scope.comments = data;
+				$scope.comments = data.commentList;
+				$scope.currentUser = data.username;
 			      // 3. This function creates an <iframe> (and YouTube player)
 			      //    after the API code downloads.
 			     console.log('before main function')
@@ -57,7 +48,7 @@ Timestamp.controller('mainController', function($scope, $http) {
 			          	events: {
 			            	'onReady': onPlayerReady,
 			            	'onStateChange': onPlayerStateChange,
-			            	'onError': onErr          
+			            	'onError': onErr
 			            }
 			        });
 			     	console.log('IN YOUTUBE FRAME MAKER')
@@ -102,22 +93,29 @@ Timestamp.controller('mainController', function($scope, $http) {
 			});
 	};
 
+
 	$scope.setTime = function(numstart){
 		player.seekTo(numstart, true);
 	}
 
 
 	$scope.newComment = function(){
-		// $http.post('api/toDos', $scope.formData)
-		// 	.success(function(data){
-		// 		$scope.formData = {};
-		// 		$scope.toDos = data;
-		// 	})
-		// 	.error(function(data){
-		// 		console.log('Error:' + data);
-		// 	});
+		console.log($scope.currentUser, " is the current user!");
+		$http.post('api/comments/new',{
+				'comment': $scope.newCommentText,
+				'time': currentTime,
+				'videoId': $scope.vidLink.split("=")[1],
+				'user': $scope.currentUser
+			})
+			.success(function(data){
+				console.log(data, "data posted to server");
+				$scope.comments.push(data);
+			})
+			.error(function(data){
+				console.log('Error:' + data);
+			});
 	};
-	
+
 
 	$scope.getTime = function(){
 		console.log(currentTime);
@@ -136,7 +134,7 @@ Timestamp.controller('mainController', function($scope, $http) {
 
 
 // 2. This code loads the IFrame Player API code asynchronously.
-   
+
 // function loginController($scope, $http){
 
 // }

@@ -1,19 +1,26 @@
 <div ng-controller="mainController">
-    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-        <div id="player"></div>
+  <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+      <div id="player"></div>
 
-    <div id = "linkForm">
-        <form>
-            Video Link <input type="text" ng-model = "vidLink"> </input>
-            <button ng-click = "getVideo(vidLink)" type="submit">Submit</button>
+  <div id = "linkForm">
+      <form>
+          Video Link <input type="text" ng-model = "vidLink"> </input>
+          <button ng-click = "getVideo(vidLink)" type="submit">Submit</button>
+      </form>
+  </div>
+
+  <!-- <div id = "numForm">
+      <form>
+          Num Start <input type="text" ng-model = "numStart"> </input>
+          <button ng-click = "setTime(numStart)" type="submit">Submit</button>
+      </form>
+  </div> -->
+  <br/>
+  <h3> Post a comment! </h3>
+      <div id = "newComment">
+        <form ng-submit = "newComment()">
+          <input type="text" ng-model="newCommentText"/>
+          <input type="submit" value="Submit"/>
         </form>
-    </div>
-
-    <div id = "numForm">
-        <form>
-            Num Start <input type="text" ng-model = "numStart"> </input>
-            <button ng-click = "setTime(numStart)" type="submit">Submit</button>
-        </form>
-    </div>
-
+  {{comments}}
 </div>

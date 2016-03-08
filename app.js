@@ -43,7 +43,7 @@ passport.use(new FacebookStrategy({
             done(null, user[0]);
             }
         })
-  
+
 }));
 
 passport.use(new LocalStrategy({
@@ -110,7 +110,7 @@ passport.use(new LocalStrategy({
                                           failureRedirect: '/#/login' })
     );
 
-    app.post('/loginLocal', 
+    app.post('/loginLocal',
   passport.authenticate('local', { failureRedirect: '/#/login' }),
   function(req, res) {
     res.redirect('/');
@@ -126,7 +126,7 @@ passport.use(new LocalStrategy({
     })
 
     app.get('/api/comments/:videoId', timestamp.getComments);
-    // app.post('/api/comments/new', timestamp.newComment);
+    app.post('/api/comments/new', timestamp.newComment);
 
     function ensureAuthenticated(req, res, next) {
       if (req.isAuthenticated()) { return next(); }
