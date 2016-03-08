@@ -10,6 +10,7 @@
     var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
     var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
     var timestamp = require('./routes/timestampRoutes');
+    var privdata = require('./config.js')
 
 
     // configuration =================
@@ -35,5 +36,4 @@
 
     // listen (start app with node server.js) ======================================
 
-    var mongoURI = "mongodb://localhost/test";
-mongoose.connect(mongoURI);
+mongoose.connect(privdata.mongodbURI);

@@ -15,14 +15,14 @@ timestamp.getComments = function(req, res){
 }
 
 timestamp.newComment = function(req, res){
-	Comment.create({req.body}, function(err, newComment){
+	Comment.create(req.body, function(err, newComment){
 		if(err){
 			res.send(err);
 		}
 
 		res.json(newComment);
 	})
-});
+};
 
 
 

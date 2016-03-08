@@ -1,6 +1,25 @@
-var Timestamp = angular.module('Timestamp', []);
+var Timestamp = angular.module('Timestamp', ['ngRoute']);
 
-function mainController($scope, $http) {
+Timestamp.config(function($routeProvider) {
+	$routeProvider
+	.when('/login', {
+		templateUrl: '/html/login.html',
+		controller: 'loginController'
+	})
+	.when('/', {
+		templateUrl: '/html/main.html',
+		controller: 'mainController'
+	})
+});
+
+Timestamp.controller('mainController', function($scope,$http) {
+
+	$scope.login = function() {
+
+	}
+});
+
+Timestamp.controller('mainController', function($scope, $http) {
 	$scope.formData = {};
 
 	$http.get('/')
@@ -44,8 +63,8 @@ function mainController($scope, $http) {
 	// 		.error(function(data){
 	// 			console.log('Error:' + data);
 	// 		});
-	// };
-	}
+	};
+});
 
 
 // function loginController($scope, $http){
