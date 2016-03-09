@@ -10,20 +10,13 @@ timestamp.getComments = function(req, res){
 	var vidId = req.params.videoId;
 	console.log(req.user, "req.user");
 	console.log(vidId)
-	Comment.find({}, function(err, commentList){
+	Comment.find({videoId: vidId}, function(err, commentList){
 		if(err){
 			res.send(err);
 		}
 		console.log(commentList)
 		res.json({commentList:commentList, username:req.user.name});
 	});
-	// Comment.create({comment:"haha thats so funnt", time:10, videoId: "PfwwCpAy0-0", user: "Annabel"}, function(err, comment){
-	// 	if(err){
-	// 		console.log(err)
-	// 		res.send(err);
-	// 	}
-	// 	console.log(comment);
-	// })
 
 }
 

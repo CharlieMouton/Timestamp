@@ -8,8 +8,12 @@ Timestamp.config(function($routeProvider) {
 		controller: 'loginController'
 	})
 	.when('/', {
+		templateUrl: '/html/login.html',
+		controller: 'loginController'
+	})
+	.when('/home',{
 		templateUrl: '/html/main.html',
-		controller: 'mainController'
+		controller: 'mainController'	
 	})
 });
 
@@ -21,7 +25,7 @@ Timestamp.controller('loginController', function($scope,$http) {
 });
 
 Timestamp.controller('mainController', function($scope, $http) {
-
+	$scope.linkSubmitted = false;
 	var currentTime;
 
 	var player;
@@ -31,6 +35,7 @@ Timestamp.controller('mainController', function($scope, $http) {
 	$scope.getVideo = function(vidLink){
 		//display video from youtube
 		//check for comments based on id
+		$scope.linkSubmitted = true;
 		var vidId = vidLink.split("=")[1];
 		console.log(vidId);
 		$http.get('api/comments/' + vidId)
@@ -129,12 +134,3 @@ Timestamp.controller('mainController', function($scope, $http) {
 	// 		});
 	};
 });
-
-	//need some kind of front end function to move things off the screen
-
-
-// 2. This code loads the IFrame Player API code asynchronously.
-
-// function loginController($scope, $http){
-
-// }

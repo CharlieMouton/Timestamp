@@ -106,14 +106,14 @@ passport.use(new LocalStrategy({
     app.get('/auth/local', passport.authenticate('local'));
 
     app.get('/auth/facebook/callback',
-      passport.authenticate('facebook', { successRedirect: '/#',
+      passport.authenticate('facebook', { successRedirect: '/#/home',
                                           failureRedirect: '/#/login' })
     );
 
     app.post('/loginLocal',
   passport.authenticate('local', { failureRedirect: '/#/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/#/home');
   });
 
 
@@ -130,7 +130,7 @@ passport.use(new LocalStrategy({
 
     function ensureAuthenticated(req, res, next) {
       if (req.isAuthenticated()) { return next(); }
-        res.redirect("/login");
+        res.redirect("/#/home");
     }
 
     // listen (start app with node server.js) ======================================
