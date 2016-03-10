@@ -14,6 +14,9 @@ timestamp.getComments = function(req, res){
 		if(err){
 			res.send(err);
 		}
+		commentList.sort(function(a, b) {
+    			return parseFloat(a.time) - parseFloat(b.time);
+			});
 		console.log(commentList)
 		res.json({commentList:commentList, username:req.user.name});
 	});
@@ -26,8 +29,15 @@ timestamp.newComment = function(req, res){
 		if(err){
 			res.send(err);
 		}
-
-		res.json(newComment);
+		console.log(req.body.videoId, 'videoId new')
+		var vidId = req.body.videoId;
+		Comment.find({videoId:vidId}, function(err, commentList){
+			commentList.sort(function(a, b) {
+    			return parseFloat(a.time) - parseFloat(b.time);
+			});
+			res.json(commentList)
+		})
+		// res.json(newComment);
 	});
 };
 
