@@ -1,4 +1,16 @@
 <div ng-controller="mainController">
+      <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+          <a class="navbar-brand" href="#/home" ng-click="getHomePage()">Timestamp</a>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="#/home" ng-click="getHomePage()">New Video </a></li>
+        <li><a ng-click="logout()">Logout</a></li>
+        <li><p class="navbar-text">Signed in as {{currentUser}}</p></li>
+      </ul>
+    </div>
+    </div>
+</nav>
   <div class = "container">
 
     <div class="wrapper" ng-hide="linkSubmitted">
@@ -26,7 +38,7 @@
           <button ng-click = "setTime(numStart)" type="submit">Submit</button>
       </form>
   </div> -->
-  <div class="row">
+  <div class="row" ng-show = "linkSubmitted">
          <div class="col-md-8">
           <h1> Timestamp</h1>
       <div id = "player"></div>

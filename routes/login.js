@@ -22,6 +22,7 @@ users.show = function(req, res){
 	
 users.logout = function(req, res){
 	req.logout();
+	console.log("logged out")
 	res.redirect("/");
 }
 

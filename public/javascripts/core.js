@@ -24,11 +24,16 @@ Timestamp.controller('loginController', function($scope,$http) {
 	}
 });
 
-Timestamp.controller('mainController', function($scope, $http) {
+Timestamp.controller('mainController', function($scope, $http, $location) {
 	$scope.linkSubmitted = false;
 	var currentTime;
 
 	var player;
+
+	$http.get('/api/pageLoad')
+		.success(function(data){
+			$scope.currentUser = data.name;
+		})
 
 	//called on click of form with whole youtube link
 	//loads video and all comments
@@ -45,6 +50,9 @@ Timestamp.controller('mainController', function($scope, $http) {
 			      // 3. This function creates an <iframe> (and YouTube player)
 			      //    after the API code downloads.
 			     console.log('before main function')
+			     if(player){
+			     	player.loadVideoById(vidId);
+			     } else{
 			    function onYouTubeIframeAPIReady() {
 			        player = new YT.Player('player', {
 			          	height: '390',
@@ -86,16 +94,19 @@ Timestamp.controller('mainController', function($scope, $http) {
 			    function onErr(event){
 			    	console.log("err");
 			    }
+			}
 			    	      //THIS IS WHERE IT IS PRINTING THE CURRENT TIME YAY
       			setInterval(function(){
    				// here you'd raise some sort of event based on the value of getCurrentTime();
    					currentTime = player.getCurrentTime()
-   					console.log(currentTime)
+   					// console.log(currentTime)
  				}, 100); // polling 8 times a second, to make sure you get it every time it changes.
 			})
 			.error(function(data){
 					console.log('Error:' + data);
 			});
+
+
 	};
 
 
@@ -106,15 +117,20 @@ Timestamp.controller('mainController', function($scope, $http) {
 
 	$scope.newComment = function(){
 		console.log($scope.currentUser, " is the current user!");
-		$http.post('api/comments/new',{
+		var newComment = {
 				'comment': $scope.newCommentText,
 				'time': currentTime,
 				'videoId': $scope.vidLink.split("=")[1],
 				'user': $scope.currentUser
-			})
+			};
+
+		$http.post('api/comments/new',newComment)
 			.success(function(data){
-				console.log(data, "data posted to server");
-				$scope.comments.push(data);
+				console.log($scope.comments, "data posted to server");
+				$scope.comments.push(newComment);
+				$scope.comments.sort(function(a, b) {
+    				return parseFloat(a.time) - parseFloat(b.time);
+				});
 			})
 			.error(function(data){
 				console.log('Error:' + data);
@@ -122,15 +138,21 @@ Timestamp.controller('mainController', function($scope, $http) {
 	};
 
 
-	$scope.getTime = function(){
-		console.log(currentTime);
-		//get time from youtube comment
-	// 	$http.post('/api/move/toDos/' + id)
-	// 		.success(function(data){
-	// 			$scope.toDos = data;
-	// 		})
-	// 		.error(function(data){
-	// 			console.log('Error:' + data);
-	// 		});
+	$scope.getHomePage = function(){
+		$scope.linkSubmitted = false;
+		currentTime = 0;
+		player.stopVideo();
+		$('#player').html("");
 	};
+
+	$scope.logout = function(){
+		$http.post("/api/logout")
+		.success(function(data){
+			console.log("logged out");
+			$location.path('/');
+		})
+		.error(function(data){
+			console.log("Error")
+		})
+	}
 });

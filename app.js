@@ -10,6 +10,8 @@
     var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
     var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
     var timestamp = require('./routes/timestampRoutes');
+    var login = require('./routes/login');
+
     // var privdata = require('./config.js')
     var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -127,6 +129,9 @@ passport.use(new LocalStrategy({
 
     app.get('/api/comments/:videoId', timestamp.getComments);
     app.post('/api/comments/new', timestamp.newComment);
+    app.post('/api/logout', login.logout);
+    app.get('/api/pageLoad', timestamp.currentUser)
+
 
     function ensureAuthenticated(req, res, next) {
       if (req.isAuthenticated()) { return next(); }

@@ -41,6 +41,10 @@ timestamp.newComment = function(req, res){
 	});
 };
 
+timestamp.currentUser = function(req, res){
+	console.log(req.user.name, 'username');
+	res.json(req.user);
+}
 
 
 module.exports = timestamp;
