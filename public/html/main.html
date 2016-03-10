@@ -14,12 +14,12 @@
   <div class = "container">
 
     <div class="wrapper" ng-hide="linkSubmitted">
-      <form class="form-signin"> 
-        <center>       
+      <form class="form-signin">
+        <center>
         <h2>Enter a Youtube Link</h2>
         <br>
         <input type="text" class="form-control" ng-model = "vidLink" placeholder="https://www.youtube.com/watch?v=OHXjxWaQs9o" required="" autofocus="" />
-        <button class="btn btn-lg btn-primary btn-block" ng-click = "getVideo(vidLink)" type="submit">Submit</button>   
+        <button class="btn btn-lg btn-primary btn-block" ng-click = "getVideo(vidLink)" type="submit">Submit</button>
       </center>
       </form>
     </div>
@@ -40,18 +40,22 @@
   </div> -->
   <div class="row" ng-show = "linkSubmitted">
          <div class="col-md-8">
-          <h1> Timestamp</h1>
       <div id = "player"></div>
+      <br/>
+      <div class="comment-wrapper">
+        <div id = "newComment" class="comment">
+          <h3> Post a comment! </h3>
+          <form ng-submit = "newComment()">
+            <input type="text" ng-model="newCommentText"/>
+          </form>
+          <h4> Hit enter to submit </h4>
+        </div>
+      </div>
     </div>
      <div class="col-md-4">
-       <div ng-show= "linkSubmitted" class = "comment-wrapper">
-      <h3> Post a comment! </h3>
-      <div id = "newComment" class="comment">
-        <form ng-submit = "newComment()">
-          <input type="text" ng-model="newCommentText"/>
-        </form>
-      </div>
+        <div ng-show= "linkSubmitted" class = "comment-wrapper">
         <div class = "comment" ng-repeat = "comment in comments track by $index">
+          <!-- {{comment}} -->
           <h4>{{comment.comment}}</h4>
           <p>{{comment.user}}</p>
         </div>

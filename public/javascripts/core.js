@@ -13,7 +13,7 @@ Timestamp.config(function($routeProvider) {
 	})
 	.when('/home',{
 		templateUrl: '/html/main.html',
-		controller: 'mainController'	
+		controller: 'mainController'
 	})
 });
 
@@ -26,9 +26,11 @@ Timestamp.controller('loginController', function($scope,$http) {
 
 Timestamp.controller('mainController', function($scope, $http, $location) {
 	$scope.linkSubmitted = false;
+	$scope.relComments = [];
 	var currentTime;
-
+	$scope.currCommIndex = 0;
 	var player;
+
 
 	$http.get('/api/pageLoad')
 		.success(function(data){
@@ -94,13 +96,33 @@ Timestamp.controller('mainController', function($scope, $http, $location) {
 			    function onErr(event){
 			    	console.log("err");
 			    }
-			}
+					};
 			    	      //THIS IS WHERE IT IS PRINTING THE CURRENT TIME YAY
       			setInterval(function(){
-   				// here you'd raise some sort of event based on the value of getCurrentTime();
-   					currentTime = player.getCurrentTime()
-   					// console.log(currentTime)
- 				}, 100); // polling 8 times a second, to make sure you get it every time it changes.
+	   					// here you'd raise some sort of event based on the value of getCurrentTime();
+	   					currentTime = player.getCurrentTime();
+							for(var index = 0; index<$scope.comments.length; index++) {
+								if ($scope.comments[index].time > currentTime) {
+									$scope.currCommIndex = index;
+									break;
+								}
+							};
+
+								console.log($scope.currCommIndex);
+
+								if ($scope.currCommIndex === 0) {
+									$scope.relComments = [$scope.comments[$scope.currCommIndex],$scope.comments[$scope.currCommIndex+1],$scope.comments[$scope.currCommIndex+2]]
+								} else if ($scope.currCommIndex === 1) {
+									$scope.relComments = [$scope.comments[$scope.currCommIndex-1],$scope.comments[$scope.currCommIndex],$scope.comments[$scope.currCommIndex+1],$scope.comments[$scope.currCommIndex+2]]
+								} else {
+									$scope.relComments = [$scope.comments[$scope.currCommIndex-2],$scope.comments[$scope.currCommIndex-1],$scope.comments[$scope.currCommIndex],$scope.comments[$scope.currCommIndex+1],$scope.comments[$scope.currCommIndex+2]]
+								}
+								console.log($scope.relComments);
+								console.log($scope.comments);
+	   					// console.log(currentTime)
+ 						}, 100); // polling 8 times a second, to make sure you get it every time it changes.
+
+
 			})
 			.error(function(data){
 					console.log('Error:' + data);

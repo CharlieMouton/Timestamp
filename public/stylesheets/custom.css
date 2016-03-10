@@ -16,20 +16,22 @@
 }
 
 body {
-	background: #f1f1f1 !important;	
+	background: #f1f1f1 !important;
 }
 
 #player{
 	width: 100%;
-	margin-top: 5%;
+	margin-top: 80px;
 }
 
 .comment-wrapper{
 	background-color: white;
 	padding: 5%;
+	position: relative;
+	margin-top: 80px;
 }
 
-.wrapper {	
+.wrapper {
   margin-top: 80px;
   margin-bottom: 80px;
 }
@@ -53,7 +55,7 @@ body {
   padding: 15px 35px 45px;
   margin: 0 auto;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);  
+  border: 1px solid rgba(0,0,0,0.1);
 
   .form-signin-heading,
 	.checkbox {
