@@ -3,6 +3,9 @@
 /*@import "bourbon";
 */
 
+/*Using bootstrap, we make some custom changes in this file to fit specifically
+for our app.*/
+
 .left-column{
 	float:left;
 	width: 75%;

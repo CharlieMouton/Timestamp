@@ -2,6 +2,9 @@
 //https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular
 //http://jsfiddle.net/CaioToOn/pkxPa/
 
+// This app lists requires, handles all passport logic and functionality and handles
+// GET and POST requests, redirecting them to our routes files.
+
 // set up ========================
 var express  = require('express');
 var app      = express();                               // create our app w/ express

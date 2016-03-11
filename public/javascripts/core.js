@@ -1,3 +1,8 @@
+// This file contains both the angular module and controllers that we use in our file.
+// It contains all the frontside logic, as well as several GET and POST requests that communicate
+// with the server. 
+
+
 var Timestamp = angular.module('Timestamp', ['ngRoute']);
 
 
@@ -96,11 +101,11 @@ Timestamp.controller('mainController', function($scope, $http, $location) {
 			    function onErr(event){
 			    	console.log("err");
 			    }
-					
+
 			    	      //THIS IS WHERE IT IS PRINTING THE CURRENT TIME YAY
       			setInterval(function(){
 	   					// here you'd raise some sort of event based on the value of getCurrentTime();
-	   					currentTime = player.getCurrentTime();	   					
+	   					currentTime = player.getCurrentTime();
 							for(var index = 0; index<$scope.comments.length; index++) {
 								if ($scope.comments[index].time > currentTime) {
 									$scope.currCommIndex = index;
