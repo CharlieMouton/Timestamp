@@ -46,5 +46,13 @@ timestamp.currentUser = function(req, res){
 	res.json(req.user);
 }
 
+// timestamp.randVid = function(req, res) {
+// 	var 
+// 	Comment.find({}, function(err, allComments){
+// 		allComments.forEach(function(element, index, array){
+// 			if (array.indexof(elemen))
+// 		})
+// 	}
+// }
 
 module.exports = timestamp;

@@ -48,14 +48,15 @@
           <form ng-submit = "newComment()">
             <input type="text" ng-model="newCommentText"/>
           </form>
-          <h4> Hit enter to submit </h4>
+          <h4> Hit enter to submit:           {{currentTime}} </h4>
         </div>
       </div>
     </div>
      <div class="col-md-4">
         <div ng-show= "linkSubmitted" class = "comment-wrapper">
-        <div class = "comment" ng-repeat = "comment in comments track by $index">
+        <div class = "comment" ng-repeat = "comment in relComments track by $index">
           <!-- {{comment}} -->
+
           <h4>{{comment.comment}}</h4>
           <p>{{comment.user}}</p>
         </div>
@@ -63,20 +64,6 @@
     </div>
     </div>
   </div>
-  <!-- <div class = "left-column">
-        <div id = "player"></div>
-    </div> -->
-        <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-<!--   <div class = "right-column">
-    <div ng-show= "linkSubmitted">
-      <h3> Post a comment! </h3>
-      <div id = "newComment">
-        <form ng-submit = "newComment()">
-          <input type="text" ng-model="newCommentText"/>
-        </form>
-        {{comments}}
-      </div>
-    </div>
-  </div> -->
+
   </div>
 </div>

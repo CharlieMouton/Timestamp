@@ -130,7 +130,8 @@ passport.use(new LocalStrategy({
     app.get('/api/comments/:videoId', timestamp.getComments);
     app.post('/api/comments/new', timestamp.newComment);
     app.post('/api/logout', login.logout);
-    app.get('/api/pageLoad', timestamp.currentUser)
+    app.get('/api/pageLoad', timestamp.currentUser);
+    // app.get('/api/randVid', timestamp.randVid);
 
 
     function ensureAuthenticated(req, res, next) {
