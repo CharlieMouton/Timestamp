@@ -2,15 +2,16 @@
 //https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular
 //http://jsfiddle.net/CaioToOn/pkxPa/
 
-    // set up ========================
-    var express  = require('express');
-    var app      = express();                               // create our app w/ express
-    var mongoose = require('mongoose');                     // mongoose for mongodb
-    var morgan = require('morgan');             // log requests to the console (express4)
-    var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
-    var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-    var timestamp = require('./routes/timestampRoutes');
-    var login = require('./routes/login');
+// set up ========================
+var express  = require('express');
+var app      = express();                               // create our app w/ express
+var mongoose = require('mongoose');                     // mongoose for mongodb
+var morgan = require('morgan');             // log requests to the console (express4)
+var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
+var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+var timestamp = require('./routes/timestampRoutes');
+var login = require('./routes/login');
+require('dotenv').config({silent: true});
 
     // var privdata = require('./config.js')
     var passport = require('passport');
@@ -21,14 +22,12 @@ var path = require('path');
 var User = require(path.join(__dirname,'./models/commentModel.js')).user;
 var Comment = require(path.join(__dirname,'./models/commentModel.js')).comment;
 
-//auth
 
-var auth = require('./auth');
-
+console.log(process.env.FACEBOOK_APP_SECRET)
 passport.use(new FacebookStrategy({
-    clientID: auth.FACEBOOK_APP_ID,
-    clientSecret: auth.FACEBOOK_APP_SECRET,
-    callbackURL: auth.FACEBOOK_CALLBACK_URL
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL
   },
   function(accessToken, refreshToken, profile, done) {
     var name = profile.displayName;
@@ -138,5 +137,6 @@ passport.use(new LocalStrategy({
         res.redirect("/#/home");
     }
 
+console.log("PROCESS", process.env.mongodbURI);
     // listen (start app with node server.js) ======================================
-mongoose.connect(auth.mongodbURI, function(err){ if(err){console.log(err)}});
+mongoose.connect(process.env.mongodbURI, function(err){ if(err){console.log(err)}});
