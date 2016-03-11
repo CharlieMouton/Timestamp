@@ -1,5 +1,5 @@
 {
-  "name": "node-todo",
+  "name": "timestamp",
   "version": "0.0.0",
   "description": "Simple todo application.",
   "main": "app.js",
