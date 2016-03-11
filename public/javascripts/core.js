@@ -100,9 +100,7 @@ Timestamp.controller('mainController', function($scope, $http, $location) {
 			    	      //THIS IS WHERE IT IS PRINTING THE CURRENT TIME YAY
       			setInterval(function(){
 	   					// here you'd raise some sort of event based on the value of getCurrentTime();
-	   					currentTime = player.getCurrentTime();
-	   					console.log(currentTime)
-	   					
+	   					currentTime = player.getCurrentTime();	   					
 							for(var index = 0; index<$scope.comments.length; index++) {
 								if ($scope.comments[index].time > currentTime) {
 									$scope.currCommIndex = index;
@@ -110,7 +108,6 @@ Timestamp.controller('mainController', function($scope, $http, $location) {
 								}
 							};
 
-								console.log($scope.currCommIndex);
 									if ($scope.currCommIndex === 0) {
 										$scope.$apply(function(){
 											$scope.relComments = [$scope.comments[$scope.currCommIndex],$scope.comments[$scope.currCommIndex+1],$scope.comments[$scope.currCommIndex+2]]
@@ -119,17 +116,20 @@ Timestamp.controller('mainController', function($scope, $http, $location) {
 										$scope.$apply(function(){
 											$scope.relComments = [$scope.comments[$scope.currCommIndex-1],$scope.comments[$scope.currCommIndex],$scope.comments[$scope.currCommIndex+1],$scope.comments[$scope.currCommIndex+2]]
 										})
+									} else if ($scope.currCommIndex === $scope.comments.length-1) {
+										$scope.$apply(function(){
+											$scope.relComments = [$scope.comments[$scope.currCommIndex-2],$scope.comments[$scope.currCommIndex-1],$scope.comments[$scope.currCommIndex]]
+										})
+									} else if ($scope.currCommIndex === $scope.comments.length-2) {
+										$scope.$apply(function(){
+											$scope.relComments = [$scope.comments[$scope.currCommIndex-2],$scope.comments[$scope.currCommIndex-1],$scope.comments[$scope.currCommIndex], $scope.comments[$scope.currCommIndex+1]]
+										})
 									} else {
 										$scope.$apply(function(){
 											$scope.relComments = [$scope.comments[$scope.currCommIndex-2],$scope.comments[$scope.currCommIndex-1],$scope.comments[$scope.currCommIndex],$scope.comments[$scope.currCommIndex+1],$scope.comments[$scope.currCommIndex+2]]
 										})
 									}
-								// console.log($scope.relComments);
-								// console.log($scope.comments);
-	   					// console.log(currentTime)
  						}, 100); // polling 8 times a second, to make sure you get it every time it changes.
-			$scope.currentTime = currentTime;
-			console.log($scope.currentTime)
 			};
 			})
 			.error(function(data){
@@ -183,7 +183,6 @@ Timestamp.controller('mainController', function($scope, $http, $location) {
 	$scope.logout = function(){
 		$http.post("/api/logout")
 		.success(function(data){
-			console.log("logged out");
 			$location.path('/');
 		})
 		.error(function(data){

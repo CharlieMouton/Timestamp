@@ -24,20 +24,6 @@
       </form>
     </div>
 
-
-<!--   <div id = "linkForm">
-      <form>
-          Video Link <input type="text" ng-model = "vidLink"> </input>
-          <button ng-click = "getVideo(vidLink)" type="submit">Submit</button>
-      </form>
-  </div> -->
-
-  <!-- <div id = "numForm">
-      <form>
-          Num Start <input type="text" ng-model = "numStart"> </input>
-          <button ng-click = "setTime(numStart)" type="submit">Submit</button>
-      </form>
-  </div> -->
   <div class="row" ng-show = "linkSubmitted">
          <div class="col-md-8">
       <div id = "player"></div>
@@ -55,8 +41,6 @@
      <div class="col-md-4">
         <div ng-show= "linkSubmitted" class = "comment-wrapper">
         <div class = "comment" ng-repeat = "comment in relComments track by $index">
-          <!-- {{comment}} -->
-
           <h4>{{comment.comment}}</h4>
           <p>{{comment.user}}</p>
         </div>
