@@ -5,9 +5,11 @@
 
 var Timestamp = angular.module('Timestamp', ['ngRoute']);
 
-
+// Nice use of the routeProvider!! Love it
 Timestamp.config(function($routeProvider) {
 	$routeProvider
+	// You can use the same controller for /login and / as you do and not use a different route 
+	// handling. 
 	.when('/login', {
 		templateUrl: '/html/login.html',
 		controller: 'loginController'

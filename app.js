@@ -25,6 +25,9 @@ var path = require('path');
 var User = require(path.join(__dirname,'./models/commentModel.js')).user;
 var Comment = require(path.join(__dirname,'./models/commentModel.js')).comment;
 
+// In general don't keep log statements in your master branch code. Moreover, it would
+// be nice to seperate the logic of authentication from your app.js make your code
+// more modular and readable. This file shouldn't be as long! :)
 
 console.log(process.env.FACEBOOK_APP_SECRET)
 passport.use(new FacebookStrategy({
