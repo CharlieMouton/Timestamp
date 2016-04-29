@@ -16,7 +16,7 @@ function errorHandler(err, req, res, next) {
 }
 
 users.show = function(req, res){
-	res.render('login')
+	res.render('login') //Is this old
 }
 
 	

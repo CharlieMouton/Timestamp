@@ -134,7 +134,7 @@ passport.use(new LocalStrategy({
     app.post('/api/logout', login.logout);
     app.get('/api/pageLoad', timestamp.currentUser);
 
-
+    // It is often better to send the main html file on * so that the angular app can be directly accessed from anywhere that doesn't have a route specified
     function ensureAuthenticated(req, res, next) {
       if (req.isAuthenticated()) { return next(); }
         res.redirect("/#/home");

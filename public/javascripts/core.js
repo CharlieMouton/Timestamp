@@ -1,7 +1,7 @@
 // This file contains both the angular module and controllers that we use in our file.
 // It contains all the frontside logic, as well as several GET and POST requests that communicate
 // with the server. 
-
+//You could modularize this.
 
 var Timestamp = angular.module('Timestamp', ['ngRoute']);
 
